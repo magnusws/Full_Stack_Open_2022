@@ -75,7 +75,7 @@ const App = () => {
       <Title title={mainTitle} />
       <Button text='good' onClick={() => setGood(good + 1)} />
       <Button text='neutral' onClick={() => setNeutral(neutral + 1)} />
-      <Button text='bad' onClick={() => setBad(bad+1)} />
+      <Button text='bad' onClick={() => setBad(bad + 1)} />
 
       <Title title={title} />
       <table>
