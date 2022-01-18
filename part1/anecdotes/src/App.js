@@ -1,5 +1,61 @@
 import React, { useState } from 'react'
 
+// Header
+const Title = ({ title }) => {
+  return (
+    <h1>{title}</h1>
+  )
+}
+
+// Button
+const Button = ({ text, onClick }) => (
+  <button onClick={onClick}>
+    {text}
+  </button>
+)
+
+// Anecdote
+const Anecdote = ({ text, number}) => (
+  <>
+    <tr>
+      <td>
+        {text}
+        </td>
+      </tr>
+    <tr>
+      <td>
+        has {number} votes
+      </td>
+    </tr>
+  </>
+)
+
+// Most popular anecdote
+const TopAnecdote = ({anecdotes, points}) => {
+  let mostVotes = 0
+  let topAnecdote = 0
+  
+  // loops through votes for each anecdote
+  points.forEach((element, index) => { 
+    if (element >= mostVotes) {
+      mostVotes = element
+      topAnecdote = index
+    }
+  }) 
+
+  // if no votes have been cast
+  if(mostVotes === 0) {
+    return (
+      <tr><td>No votes yet</td></tr>
+    )
+  }
+
+  return (
+    <Anecdote text={anecdotes[topAnecdote]} number={points[topAnecdote]} />
+  )
+}
+
+//App
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often',
@@ -12,10 +68,33 @@ const App = () => {
   ]
 
   const [selected, setSelected] = useState(0)
+  const [points, setPoints] = useState(Array(7).fill(0))
+
+  const addPoint = () => {
+    const copy = [...points]
+    copy[selected] += 1
+    setPoints(copy)
+  }
 
   return (
     <div>
-      {anecdotes[selected]}
+
+      <Title title="Anecdote of the Day" />
+      <table>
+        <tbody>
+          <Anecdote text={anecdotes[selected]} number={points[selected]} />
+        </tbody>
+      </table>
+      <Button text='vote' onClick={addPoint} />
+      <Button text='next anecdote' onClick={() => setSelected(Math.floor(Math.random() * 7))} />
+
+      <Title title="Anecdote with most votes" />
+      <table>
+        <tbody>
+          <TopAnecdote anecdotes={anecdotes} points={[...points]} />
+        </tbody>
+      </table>
+
     </div>
   )
 }
