@@ -27,6 +27,8 @@ const CountryInfo = ({ name, capital, population, languages, flagUrl }) => {
   )
 }
 
+// NOTE: i had to create a help function to extract the language 
+// values from a list of language objects without knowing their keys.
 const extractObjectValueWithoutKey = (objects) => {
   const objectValues = []
   for (var propName in objects) {
@@ -39,18 +41,14 @@ const extractObjectValueWithoutKey = (objects) => {
 }
 
 /*
-
-NOTE: i had to create a help function to extract the language 
-values from a list of language objects without knowing their keys
-
 EXAMPLE:
+
 languages: {
   fra: "French",
   gsw: "Swiss German",
   ita: "Italian",
   roh: "Romansh"
 }
-
 */
 
 export default CountryInfo

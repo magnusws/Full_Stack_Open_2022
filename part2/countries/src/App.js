@@ -24,14 +24,9 @@ function App() {
   
   return (
     <div>
-      <Filter onChange={handleSearchChange} value={search}/>
-      <Countries 
-        search={search} 
-        countries={countries} 
-      />
-
+      <Filter onChange={handleSearchChange} value={search} />
+      <Countries search={search} countries={countries} />
     </div>
-    
   )
 }
 
