@@ -18,7 +18,7 @@ const Persons = ({search, persons}) => {
   )
 }
 
-// Default(no input): returns an array with every single person.
+// Default(no input in search): returns an array with every single person.
 // If search input: returns an array with matching persons if any.
 const filterPersons = (search, persons) => {
   if (search !== '') {
