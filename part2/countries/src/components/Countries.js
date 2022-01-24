@@ -30,7 +30,7 @@ const Countries = ({ search, countries}) => {
     return (
       <>
       <CountryInfo
-        key={viewCountry.name.common}
+        key={viewCountry.ccn3}
         name={viewCountry.name.common}
         capital={viewCountry.capital}
         population={viewCountry.population}
@@ -68,7 +68,7 @@ const Countries = ({ search, countries}) => {
       {filteredList
         .map(c => (
             <CountryInfo
-              key={c.cca2}
+              key={c.ccn3}
               name={c.name.common}
               capital={c.capital}
               population={c.population}
@@ -81,15 +81,14 @@ const Countries = ({ search, countries}) => {
 }
 
 
-// Default(no input in search): returns an empty array.
+// No input in search: returns an empty array.
 // If search input: returns an array with matching countries if any.
 const filterCountries = (search, countries) => {
   if (search !== '') {
     return (countries.filter(country =>
       country.name.common.toLowerCase().indexOf(search.toLowerCase()) > -1))
-  } else {
-    return []
   }
+  return []
 }
 
 export default Countries

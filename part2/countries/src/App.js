@@ -6,13 +6,10 @@ import Filter from './components/Filter'
 function App() {
   const [countries, setCountries] = useState([])
   const [search, setSearch] = useState('')
-  const [selected, setSelected] = useState('')
 
   const handleSearchChange = (event) => {
     setSearch(event.target.value)
   }
-
-
 
   useEffect(() => {
     console.log('effect')
@@ -24,7 +21,6 @@ function App() {
       })
   }, [])
 
-
   
   return (
     <div>
@@ -32,7 +28,6 @@ function App() {
       <Countries 
         search={search} 
         countries={countries} 
-        onChange={handleSearchChange}
       />
 
     </div>

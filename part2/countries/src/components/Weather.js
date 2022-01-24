@@ -13,7 +13,7 @@ const Weather = ({capitalName}) => {
       .get('https://api.openweathermap.org/data/2.5/weather', {params})
       .then(response => {
         const weatherData = response.data
-        console.log(`Temp in ${weatherData.name} is ${weatherData.main.temp} K`);
+        console.log(`Temp in ${weatherData.name} is ${weatherData.main.temp} K`)
         setWeather(weatherData)
       }).catch(error => {
         console.log(error);
