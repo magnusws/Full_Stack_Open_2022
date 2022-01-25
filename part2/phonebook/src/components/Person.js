@@ -1,12 +1,16 @@
 import React from 'react'
 
-const Person = ({ name, number }) => {
+const Person = ({ id, name, number, onClick }) => {
   return (
-    <tr>
-      <td>
-        {name} {number}
-      </td>
-    </tr>)
+    <>
+      <tr>
+        <td>
+          {name} {number}
+          <button value={id} onClick={onClick}>delete</button>
+        </td>
+      </tr>
+    </>
+    )
 }
 
 export default Person
