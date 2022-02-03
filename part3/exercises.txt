@@ -1,1 +1,0 @@
-Link to full exercise text: https://fullstackopen.com/en/part0/fundamentals_of_web_apps#document-object-model-or-dom
