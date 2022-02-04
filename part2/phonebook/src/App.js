@@ -45,8 +45,8 @@ const App = () => {
     if (validInput) {                    // if both fields in the form has text
       
       const doesAlreadyExist = persons         // checks if person already exist
-        .map(person => person.name)
-        .includes(newName)
+        .map(person => person.name.toLowerCase())
+        .includes(newName.toLowerCase())
       
       if (!doesAlreadyExist) {            // if a person does not already exist
 
