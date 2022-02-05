@@ -33,7 +33,7 @@ const favoriteBlog = (blogs) => {
 const mostBlogs = (blogs) => {
   if(blogs.length !== 0) {
 
-    // Creates array with author obj: no duplicates: name and count
+    // Creates array with author obj: no duplicates: name and blogs
     const authors = [... new Set(blogs.map(blog => blog.author))]
       .map(author => ({
         author: author,
