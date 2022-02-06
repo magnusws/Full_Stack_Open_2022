@@ -92,6 +92,15 @@ const blogsInDb = async () => {
   return blogs.map(b => b.toJSON())
 }
 
+// help func returns a non existing id
+const nonExistingId = async () => {
+  const blog = new Blog(newBlog)
+  await blog.save()
+  await blog.remove()
+
+  return blog._id.toString()
+}
+
 module.exports = {
   emptyList,
   listWithOneBlog,
@@ -99,5 +108,6 @@ module.exports = {
   newBlog,
   newBlogWithoutLikes,
   newBlogWithoutTitleAndUrl,
+  nonExistingId,
   blogsInDb
 }
