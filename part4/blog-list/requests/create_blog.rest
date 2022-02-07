@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-  "title": "Architecture and Landscaping in Iceland",
-  "author": "Bjork",
-  "url": "https://www.aandlini.com",
-  "likes": 17
+  "title": "Expand blogs so that each blog contains information on the creator of the blog.",
+  "author": "Herman Miller",
+  "url": "https://www.thisisablog.com",
+  "likes": 12
 }

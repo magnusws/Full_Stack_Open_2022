@@ -1,4 +1,5 @@
 const Blog = require('../models/blog')
+const User = require('../models/user')
 
 // empty list
 const emptyList = []
@@ -86,10 +87,64 @@ const newBlogWithoutTitleAndUrl = {
   likes: 5,
 }
 
+// initial users
+const initialUsers = [
+  {
+    "username": "Yahoo",
+    "name": "Berit Andersen",
+    "password": "teddy"
+  },
+  {
+    "username": "Jippiii",
+    "name": "Truls Svendsen",
+    "password": "teddy"
+  },
+  {
+    "username": "Whoooah",
+    "name": "Lisbeth Salander",
+    "password": "teddy"
+  }
+]
+
+// data for new user
+const newUser = {
+  "username": "Henke",
+  "name": "Henrik Hansen",
+  "password": "teddy"
+}
+
+const newUserInvalidUsername = {
+  "username": "He",
+  "name": "Henrik Hansen",
+  "password": "teddy"
+}
+
+const newUserInvalidPassword = {
+  "username": "Henke",
+  "name": "Henrik Hansen",
+  "password": "te"
+}
+
+const newUserMissingUsername = {
+  "name": "Henrik Hansen",
+  "password": "teddy"
+}
+
+const newUserMissingPassword = {
+  "username": "Henke",
+  "name": "Henrik Hansen",
+}
+
 // help func returns every blog saved in db
 const blogsInDb = async () => {
   const blogs = await Blog.find({})
   return blogs.map(b => b.toJSON())
+}
+
+// help func returns every blog saved in db
+const usersInDb = async () => {
+  const users = await User.find({})
+  return users.map(u => u.toJSON())
 }
 
 // help func returns a non existing id
@@ -108,6 +163,13 @@ module.exports = {
   newBlog,
   newBlogWithoutLikes,
   newBlogWithoutTitleAndUrl,
+  initialUsers,
+  newUser,
+  newUserInvalidUsername,
+  newUserInvalidPassword,
+  newUserMissingUsername,
+  newUserMissingPassword,
   nonExistingId,
-  blogsInDb
+  blogsInDb,
+  usersInDb
 }
