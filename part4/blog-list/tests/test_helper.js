@@ -1,6 +1,9 @@
 const Blog = require('../models/blog')
 const User = require('../models/user')
 
+// Authorization key
+const authKey = 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hZ251c3dzIiwiaWQiOiI2MjAwMDIzOTM0NTQwNDUwZTdmMWFhZDUiLCJpYXQiOjE2NDQzMTQ1MTh9.e210V8g9sgateDqooKzFUq34Z8zehKSeUeEgMo_y5RA'
+
 // empty list
 const emptyList = []
 
@@ -141,7 +144,7 @@ const blogsInDb = async () => {
   return blogs.map(b => b.toJSON())
 }
 
-// help func returns every blog saved in db
+// help func returns every user saved in db
 const usersInDb = async () => {
   const users = await User.find({})
   return users.map(u => u.toJSON())
@@ -157,6 +160,7 @@ const nonExistingId = async () => {
 }
 
 module.exports = {
+  authKey,
   emptyList,
   listWithOneBlog,
   initialBlogs,

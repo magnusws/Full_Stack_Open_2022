@@ -1,19 +1,39 @@
 const mongoose = require('mongoose')
 const supertest = require('supertest')
+const jwt = require('jsonwebtoken')
 const helper = require('./test_helper')
 const app = require('../app')
 const api = supertest(app)
 
 const Blog = require('../models/blog')
+const User = require('../models/user')
 
+let authToken = null
+
+// Before each test
 beforeEach(async () => {
+  // deletes any test data in db
   await Blog.deleteMany({})
-  const blogObjects = helper.initialBlogs
-    .map(blog => new Blog(blog))
+  await User.deleteMany({})
+
+  // creates a test user and saves it to db
+  const testUser = await new User(helper.newUser).save()
+
+  // creates a token for the test user
+  const userInfo = { username: testUser.username, id: testUser.id }
+  authToken = jwt.sign(userInfo, process.env.SECRET)
+
+  // init blog objects with user id
+  const blogObjects = helper.initialBlogs.map(blog => {
+    blog.user = testUser.id
+    return new Blog(blog)
+  })
+  // save blog obj to db
   const promiseArray = blogObjects.map(blog => blog.save())
   await Promise.all(promiseArray)
 })
 
+// When initial blog posts are saved
 describe('when there is some blogs saved', () => {
   // Test: blogs are returned as JSON
   test('blogs are returned as json', async () => {
@@ -44,6 +64,7 @@ describe('adding a new blog', () => {
     await api
       .post('/api/blogs')
       .send(helper.newBlog)
+      .set('Authorization', `bearer ${authToken}`)
       .expect(201)
       .expect('Content-Type', /application\/json/)
 
@@ -61,6 +82,7 @@ describe('adding a new blog', () => {
     const response = await api
       .post('/api/blogs')
       .send(helper.newBlogWithoutLikes)
+      .set('Authorization', `bearer ${authToken}`)
       .expect(201)
       .expect('Content-Type', /application\/json/)
 
@@ -73,7 +95,16 @@ describe('adding a new blog', () => {
     await api
       .post('/api/blogs')
       .send(helper.newBlogWithoutTitleAndUrl)
+      .set('Authorization', `bearer ${authToken}`)
       .expect(400)
+  })
+
+  // Test: fails with code 401 if a token is not provided
+  test('fails with code 401 if a token is not provided', async () => {
+    await api
+      .post('/api/blogs')
+      .send(helper.newBlog)
+      .expect(401)
   })
 })
 
@@ -87,6 +118,7 @@ describe('removing a blog', () => {
 
     await api
       .delete(`/api/blogs/${blogToDelete.id}`)
+      .set('Authorization', `Bearer ${authToken}`)
       .expect(204)
 
     const blogsAtEnd = await helper.blogsInDb()
@@ -103,9 +135,9 @@ describe('removing a blog', () => {
 
     await api
       .delete(`/api/notes/${nonExistingId}`)
+      .set('Authorization', `bearer ${authToken}`)
       .expect(404)
   })
-
 })
 
 // Test: updating a blog

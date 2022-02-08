@@ -1,4 +1,6 @@
 const blogsRouter = require('express').Router()
+const jwt = require('jsonwebtoken')
+const middleware = require('../utils/middleware')
 const Blog = require('../models/blog')
 const User = require('../models/user')
 
@@ -21,14 +23,14 @@ blogsRouter.get('/:id', async (request, response) => {
 })
 
 // POST: a new blog obj
-blogsRouter.post('/', async (request, response) => {
+blogsRouter.post('/', middleware.userExtractor, async (request, response) => {
   const body = request.body
+  const user = await User.findById(request.user.id)
 
-  const users = await User.find({})
-  const user = users[0]
-  
-  if (!body.title || !body.url ){
-    return response.status(400).end()
+  if (!body.title || !body.url) {
+    return response
+      .status(400)
+      .json({ error: 'missing url or/and title'})
   }
 
   const blog = new Blog({
@@ -36,7 +38,7 @@ blogsRouter.post('/', async (request, response) => {
     author: body.author,
     url: body.url,
     likes: body.likes === undefined ? 0 : body.likes,
-    user: user._id
+    user: user.id
   })
 
   const savedBlog = await blog.save()
@@ -48,9 +50,17 @@ blogsRouter.post('/', async (request, response) => {
 })
 
 // DELETE: a single blog post by id
-blogsRouter.delete('/:id', async (request, response) => {
-  await Blog.findByIdAndRemove(request.params.id)
-  response.status(204).end()
+blogsRouter.delete('/:id', middleware.userExtractor, async (request, response) => {
+  const user = request.user
+  const blogId = request.params.id
+
+  const blog = await Blog.findById(blogId)
+
+  if (user.id.toString() === blog.user.toString()) {
+    await Blog.findByIdAndRemove(blogId)
+    return response.status(204).end()
+  }
+  response.status(401).json({ error: 'invalid user id' })
 })
 
 
