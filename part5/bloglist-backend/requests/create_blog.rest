@@ -1,0 +1,10 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hZ251c3dzIiwiaWQiOiI2MjAwMDIzOTM0NTQwNDUwZTdmMWFhZDUiLCJpYXQiOjE2NDQzMTQ1MTh9.e210V8g9sgateDqooKzFUq34Z8zehKSeUeEgMo_y5RA
+
+{
+  "title": "It would also be possible to register a middleware only for a specific operation.",
+  "author": "Petter Northug",
+  "url": "https://www.thisisablog.com",
+  "likes": 72
+}
