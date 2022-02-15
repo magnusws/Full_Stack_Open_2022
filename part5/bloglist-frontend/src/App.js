@@ -129,9 +129,8 @@ const App = () => {
   )
 
   const blogsList = () => (
-      blogs.map(blog => <Blog key={blog.id} blog={blog} username={user.username} update={updateBlog} remove={removeBlog} />)
+    blogs.map(blog => <Blog key={blog.id} blog={blog} username={user.username} update={updateBlog} remove={removeBlog} />)
   )
-  console.log(user)
 
 
   return (
@@ -140,19 +139,19 @@ const App = () => {
         <div>
           <h2>Log in to application</h2>
           <Notification message={notificationText} isError={error} />
-          <LoginForm 
-            handleLogin={handleLogin} 
-            setUsername={setUsername} 
-            setPassword={setPassword} 
-            username={username} 
-            password={password} 
+          <LoginForm
+            handleLogin={handleLogin}
+            setUsername={setUsername}
+            setPassword={setPassword}
+            username={username}
+            password={password}
           />
         </div> :
         <div>
           <h2>blogs</h2>
           <Notification message={notificationText} isError={error} />
           <p>{user.name} logged in
-          <button type="button" onClick={() => handleLogout()}>logout</button>
+            <button type="button" onClick={() => handleLogout()}>logout</button>
           </p>
           {blogForm()}
           <br></br>

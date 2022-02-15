@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
-const Blog = ({blog, username, update, remove}) => {
+const Blog = ({
+  blog,
+  username,
+  update,
+  remove
+}) => {
   const [viewDetails, setViewDetails] = useState(false)
 
   const createdByUser = (blog.user.username === username)
@@ -57,9 +63,17 @@ const Blog = ({blog, username, update, remove}) => {
           </tr>
         </tbody>
       </table>
-    </div>  
+    </div>
   )
-  
 }
+
+Blog.propTypes = {
+  blog: PropTypes.object.isRequired,
+  username: PropTypes.string.isRequired,
+  update: PropTypes.func.isRequired,
+  remove: PropTypes.func.isRequired
+}
+
+Blog.displayName = 'Blog'
 
 export default Blog
