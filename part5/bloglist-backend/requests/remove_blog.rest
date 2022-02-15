@@ -1,2 +1,2 @@
-DELETE http://localhost:3003/api/blogs/blogID
-Authorization: bearer token
+DELETE http://localhost:3003/api/blogs/6203c9c44af321ba26f545e7
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpZCI6IjYyMDNiMjY2NGFmMzIxYmEyNmY1NDUzOCIsImlhdCI6MTY0NDQzNDU3OH0.fEXNw8tWfo9-aJ1p469MzKSHTNtIIOS8JUIbmP6u4tI

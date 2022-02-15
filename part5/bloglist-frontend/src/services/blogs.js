@@ -9,9 +9,9 @@ const setToken = newToken => {
 }
 
 // get all blog posts
-const getAll = () => {
-  const request = axios.get(baseUrl)
-  return request.then(response => response.data)
+const getAll = async () => {
+  const response = await axios.get(baseUrl)
+  return response.data
 }
 
 // create a new blog post
@@ -23,6 +23,31 @@ const create = async newObject => {
   return response.data
 }
 
-const blogService = { getAll, create, setToken }
+// update a blog post
+const update = async (blogId, blogObject) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  const response = await axios.put(
+    generateUrl(blogId), 
+    blogObject, 
+    config
+  )
+  return response.data
+}
+
+const remove = async blogId => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  const response = await axios.delete(generateUrl(blogId), config)
+  return response.data
+}
+
+const generateUrl = (blogId) => {
+  return baseUrl.concat(`/${blogId}`)
+}
+
+const blogService = { getAll, create, update, remove, setToken }
 
 export default blogService
