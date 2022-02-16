@@ -6,7 +6,8 @@
   "scripts": {
     "start": "NODE_ENV=production node index.js",
     "dev": "NODE_ENV=development nodemon index.js",
-    "test": "NODE_ENV=test jest --verbose --runInBand"
+    "test": "NODE_ENV=test jest --verbose --runInBand",
+    "start:test": "cross-env NODE_ENV=test node index.js"
   },
   "author": "Magnus Walberg Solbakken",
   "license": "ISC",
@@ -21,6 +22,7 @@
     "mongoose-unique-validator": "2.0.1"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "jest": "^27.4.7",
     "nodemon": "^2.0.15",
     "supertest": "^6.2.2"

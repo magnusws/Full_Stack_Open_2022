@@ -29,8 +29,8 @@ const update = async (blogId, blogObject) => {
     headers: { Authorization: token },
   }
   const response = await axios.put(
-    generateUrl(blogId), 
-    blogObject, 
+    generateUrl(blogId),
+    blogObject,
     config
   )
   return response.data

@@ -13,8 +13,8 @@ const App = () => {
   const [notificationText, setNotificationText] = useState(null)
   const [error, setError] = useState(false)
 
-  const [username, setUsername] = useState('test')
-  const [password, setPassword] = useState('test')
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
   const [user, setUser] = useState(null)
 
