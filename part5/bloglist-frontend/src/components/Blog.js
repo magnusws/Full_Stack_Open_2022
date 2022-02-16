@@ -36,16 +36,16 @@ const Blog = ({
   }
 
   const blogDetails = () => (
-    <>
+    <div className="blogDetails">
       <br/>
-      {blog.url}
-      <br />
-      likes {blog.likes} <button onClick={() => updateLikes()}>like</button>
+      <span className="blogUrl"> {blog.url} </span>
       <br/>
-      {blog.user.name}
+      <span className="blogLikes"> likes {blog.likes} </span> <button className="blogLikeButton" onClick={() => updateLikes()}>like</button>
+      <br/>
+      <span className="blogUserName"> {blog.user.name} </span>
       <br/>
       {createdByUser && <button onClick={() => removeBlog()}>remove</button>}
-    </>
+    </div>
   )
 
   return (
@@ -54,11 +54,14 @@ const Blog = ({
         <tbody>
           <tr>
             <td>
-              {blog.title} {blog.author}{' '}
-              <button onClick={() => setViewDetails(!viewDetails)}>
-                {viewDetails ? 'hide' : 'view'}
-              </button>
-              {viewDetails && blogDetails()}
+              <div className="blog">
+                <span className="blogTitle"> {blog.title} </span>
+                <span className="blogAuthor"> {blog.author} {' '} </span>
+                <button className="blogDetailsButton" onClick={() => setViewDetails(!viewDetails)}>
+                  {viewDetails ? 'hide' : 'view'}
+                </button>
+                {viewDetails && blogDetails()}
+              </div>
             </td>
           </tr>
         </tbody>
