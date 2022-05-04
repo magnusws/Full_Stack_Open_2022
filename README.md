@@ -1,5 +1,5 @@
-# Full Stack Open 2021 - University of Helsinki
-Full Stack open 2021 - Exercises
+# Full Stack Open 2022 - University of Helsinki
+Full Stack open 2022 - Exercises
 
 https://fullstackopen.com/en/
 
